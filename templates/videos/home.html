@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Buscar videos en YouTube</h2>
+
+<form method="get" action="{% url 'home' %}" class="mb-3">
+    <input type="text" name="q" class="form-control" placeholder="Buscar videos..." value="{{ request.GET.q }}">
+</form>
+
+<div class="row">
+    {% for video in videos %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <iframe class="card-img-top" src="https://www.youtube.com/embed/{{ video.id }}" allowfullscreen></iframe>
+                <div class="card-body">
+                    <h5 class="card-title">{{ video.title }}</h5>
+                    <form method="post" action="{% url 'marcar_favorito' video.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-danger">❤️ Marcar como favorito</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No hay resultados.</p>
+    {% endfor %}
+</div>
+{% endblock %}
