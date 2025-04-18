@@ -13,7 +13,7 @@
                 <span class="navbar-text text-white me-3">
                     Bienvenido, {{ user.username }}
                 </span>
-                {% comment %} <a class="btn btn-outline-light" href="{% url 'logout' %}">Cerrar sesión</a> {% endcomment %}
+                
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn btn-outline-light btn-sm">Cerrar sesión</button>

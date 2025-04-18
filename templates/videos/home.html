@@ -3,6 +3,9 @@
 
 {% block content %}
 <h2 class="mb-4">Buscar videos en YouTube</h2>
+<div class=" text-end">
+    <a class="btn btn-outline-secondary btn-sm mb-3" href="{% url 'ver_favoritos' %}">Ver Favoritos</a>
+</div>
 
 <form method="get" action="{% url 'home' %}" class="mb-3">
     <input type="text" name="q" class="form-control" placeholder="Buscar videos..." value="{{ request.GET.q }}">

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Favoritos{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Mis videos favoritos</h2>
+
+<div class="row">
+    {% for video in favoritos %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <iframe class="card-img-top" src="https://www.youtube.com/embed/{{ video.video_id }}" allowfullscreen></iframe>
+                <div class="card-body">
+                    <h5 class="card-title">{{ video.titulo }}</h5>                    
+                </div>
+                <form method="post" action="{% url 'desmarcar_favorito' video.video_id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-secondary" type=sumit>🗑️ Quitar de favoritos</button>
+                </form>
+                <a class="btn btn-outline-secondary w-25 btn-sm mt-3 mb-3" href="/">Regresar</a>
+                
+            </div>
+        </div>
+    {% empty %}
+        <p>Aún no tienes favoritos.</p>
+        <a class="btn btn-outline-secondary w-25 btn-sm" href="/">Regresar</a>
+    {% endfor %}
+</div>
+{% endblock %}
